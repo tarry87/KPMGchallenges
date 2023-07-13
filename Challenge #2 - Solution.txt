@@ -1,0 +1,25 @@
+We need to write code that will query the meta data of an instance within Azure and provide a json formatted output.
+
+Solution : to implement the solution , we need to use Azure Instance Metadata Service that can provide the resource details at a granual level.
+
+The Azure Instance Metadata Service (IMDS) provides information about currently running virtual machine instances. You can use it to manage and configure your virtual machines. This information includes the SKU, storage, network configurations, and upcoming maintenance events. 
+
+here i have used terraform module in the output block where i have used jsonencode function to output the virtual machine identity.
+
+I Prefer Terraform code to write this module , and after running the below code in the tf file we can run terraform output to generate the ouput in Json format or we can also define in the main.tf file.
+
+-------------------------------------------------------------------------------------------------------------------------
+
+data "azurerm_virtual_machine" "instance" {
+  name                = "VM_Name"
+  resource_group_name = "Resource_GroupName"
+}
+
+output "instance_metadata" {
+  value = jsonencode(data.azurerm_virtual_machine.instance.identity)
+}
+
+
+
+terraform output
+

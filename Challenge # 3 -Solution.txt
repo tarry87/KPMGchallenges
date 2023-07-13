@@ -1,0 +1,49 @@
+Challenge # 3: 
+
+
+We would like a function where you pass in the object and a key and get back the value.
+
+
+Example Inputs
+object = {“a”:{“b”:{“c”:”d”}}}
+key = a/b/c
+object = {“x”:{“y”:{“z”:”a”}}}
+key = x/y/z
+value = a
+
+
+
+
+Solution : 
+
+Here i use the bash shell scripting language to get the desired output.
+
+Explaination i can give in the upcoming rounds for the code.
+-----------------------------------------------------------------------------------------------------------
+
+#!/bin/bash
+
+function get_value_by_key() {
+    local obj="$1"
+    local key="$2"
+
+    local value=$(echo "$obj" | jq -r ".$key")
+    echo "$value"
+}
+
+# Example usage
+object1='{"a":{"b":{"c":"d"}}}'
+key1='a.b.c'
+
+value1=$(get_value_by_key "$object1" "$key1")
+echo "$value1"  # Output: d
+
+object2='{"x":{"y":{"z":"a"}}}'
+key2='x.y.z'
+
+value2=$(get_value_by_key "$object2" "$key2")
+echo "$value2"  # Output: a
+
+
+
+
